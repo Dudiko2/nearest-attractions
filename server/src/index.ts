@@ -1,12 +1,23 @@
+import dotenv from "dotenv";
 import express from "express";
 import path from "path";
+import { getNearestAttractions } from "./controllers/attractions";
+import { connectDB } from "./db";
 
-const PORT = process.env.port || 5000;
-const app = express();
+const run = async () => {
+    dotenv.config();
+    await connectDB();
+    const PORT = process.env.port || 5000;
+    const app = express();
 
-if (process.env.NODE_ENV === "production")
-    app.use(express.static(path.join(__dirname, "../../client/build")));
+    app.get("/api/attractions", getNearestAttractions);
 
-app.listen(PORT, () => {
-    console.log(`running on ${PORT}`);
-});
+    if (process.env.NODE_ENV === "production") {
+        console.log("fix this");
+        app.use(express.static(path.join(__dirname, "../../client/build")));
+    }
+
+    app.listen(PORT);
+};
+
+run();

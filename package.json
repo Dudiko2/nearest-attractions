@@ -1,0 +1,17 @@
+{
+    "name": "nearest-attractions",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "postinstall": "(cd server && npm install); (cd client && npm install)",
+        "build": "(cd server && npm run build); (cd client && npm run build)",
+        "dev:server": "cd server && npm run dev",
+        "dev:client": "cd client && npm start",
+        "dev": "concurrently \"npm:dev:*\""
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "concurrently": "^6.3.0"
+    }
+}

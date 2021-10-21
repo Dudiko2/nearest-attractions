@@ -1,35 +1,34 @@
-import { useEffect, useState } from "react";
-import Accordion from "./components/Accordion";
+import { useState } from "react";
 import Container from "./wrappers/Container";
 import styles from "./styles/App.module.css";
+import StartPage from "./pages/Start";
+import { useUserLocation } from "./lib/geolocation";
+import useAttractions from "./hooks/useAttractions";
+import AttractionsPage from "./pages/Attractions";
 
 function App() {
-    const [attractions, setAttractions] = useState<Array<any>>([]);
+    const { data: userLocation } = useUserLocation();
 
-    console.log(attractions);
-
-    useEffect(() => {
-        fetch("/api/attractions?lat=31.771&long=35.217")
-            .then((r) => r.json())
-            .then((j) => setAttractions(j));
-    }, []);
+    const { data: attractions, init: getAttractions } = useAttractions({
+        latitude: userLocation?.latitude,
+        longitude: userLocation?.longitude,
+    });
+    const [show, setShow] = useState(false);
 
     return (
         <div className={styles.App}>
-            <Container fluid>
-                <Container className={styles.attractionsSection}>
-                    <h1
-                        style={{
-                            color: "var(--active-text)",
-                            fontSize: "3rem",
-                            padding: "2rem 1rem",
+            <Container fluid className={styles.main}>
+                {!show && (
+                    <StartPage
+                        showAttractions={() => {
+                            setShow(true);
+                            getAttractions();
                         }}
-                    >
-                        אטרקציות בסביבתך
-                    </h1>
-                    <Accordion attractions={attractions} />
-                </Container>
-                <Container></Container>
+                    />
+                )}
+                {show && !!userLocation && (
+                    <AttractionsPage attractions={attractions} />
+                )}
             </Container>
         </div>
     );

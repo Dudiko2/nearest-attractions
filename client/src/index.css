@@ -2,12 +2,19 @@
     --light-bg: #cdd9dd;
     --mid-bg: #b8cbd1;
     --active-text: #6c9dfc;
+    --active-text-light: #83a9f3;
+    --text-dark: #01212b;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
 }
 
 body {

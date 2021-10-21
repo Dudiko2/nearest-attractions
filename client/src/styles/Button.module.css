@@ -1,0 +1,25 @@
+.Button {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 1rem 1.4rem;
+    margin: 0.2rem;
+    width: 100%;
+    max-width: 250px;
+    border: none;
+    border-radius: 0.3rem;
+    font-family: "Rubik", sans-serif;
+    color: #f6f6f6;
+    background-color: var(--active-text);
+    transition: all 300ms ease-out;
+}
+
+.Button:hover {
+    background-color: var(--active-text-light);
+    color: white;
+    cursor: pointer;
+}
+
+.Button:disabled {
+    background-color: gray;
+    cursor: default;
+}

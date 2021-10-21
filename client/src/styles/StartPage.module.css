@@ -1,0 +1,31 @@
+.container {
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome {
+    padding: 2rem;
+    align-items: center;
+}
+
+.welcome h1 {
+    color: var(--text-dark);
+}
+
+.location {
+    align-items: center;
+    background-color: var(--light-bg);
+    margin: 1rem 0;
+    padding: 2rem;
+    border-radius: 0.3rem;
+}
+
+.location > * + * {
+    margin-top: 0.5rem;
+}
+
+.buttonContainer {
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}

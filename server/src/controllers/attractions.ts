@@ -35,8 +35,9 @@ export const getNearestAttractions: Handler = async (req, res) => {
                 latitude: aLat,
                 longitude: aLong
             });
+            const attraction = a.toJSON();
 
-            return { attraction: a, distance };
+            return { ...attraction, distance };
         })
         .sort((a, b) => a.distance - b.distance)
         .filter((a) => a.distance <= 40);

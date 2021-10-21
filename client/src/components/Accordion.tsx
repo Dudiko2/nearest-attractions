@@ -11,7 +11,7 @@ const Accordion: FC<Props> = ({ attractions }) => {
             {attractions.map((a, i) => {
                 return (
                     <li
-                        key={a.attraction.id + a.attraction.name}
+                        key={a.id + a.name}
                         style={{ animationDelay: `${100 * i}ms` }}
                     >
                         <AccordionEntry data={a} />
@@ -37,7 +37,7 @@ const AccordionEntry: FC<EntryProps> = ({ data }) => {
         <div className={`${styles.entry} ${active ? styles.active : ""}`}>
             <div className={styles.header} onClick={clickHandler}>
                 <div className={styles.openIc}>i</div>
-                <div className={styles.name}>{data.attraction.name}</div>
+                <div className={styles.name}>{data.name}</div>
                 <div className={styles.distance}>
                     {data.distance.toFixed(1)} ק"מ
                 </div>
@@ -54,12 +54,12 @@ const AccordionEntry: FC<EntryProps> = ({ data }) => {
             <section className={styles.details}>
                 <div>
                     <h4>שעות פעילות</h4>
-                    <p>{data.attraction.openingHours}</p>
+                    <p>{data.openingHours}</p>
                 </div>
                 <div>
                     <h4>כתובת</h4>
-                    <p>{data.attraction.address}</p>
-                    <a href={data.attraction.website}>לינק לאתר האטרקציה</a>
+                    <p>{data.address}</p>
+                    <a href={data.website}>לינק לאתר האטרקציה</a>
                 </div>
             </section>
         </div>

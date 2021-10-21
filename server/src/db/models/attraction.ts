@@ -8,6 +8,7 @@ export interface IAttraction {
     lat: number;
     long: number;
     website: string;
+    attractionType: string;
 }
 
 const attractionSchema = new Schema<IAttraction>({
@@ -20,7 +21,8 @@ const attractionSchema = new Schema<IAttraction>({
     openingHours: { type: String },
     lat: { type: Number },
     long: { type: Number },
-    website: { type: String }
+    website: { type: String },
+    attractionType: { type: String }
 });
 
 const attractionModel = model<IAttraction>("Attraction", attractionSchema);

@@ -38,13 +38,12 @@ const Accordion: FC<Props> = ({ attractions }) => {
         if (copy[id]) {
             delete copy[id];
             setFavorites(copy);
-            showAlert("Removed from favorites");
+            showAlert("הוסר ממועדפים");
         } else {
             copy[id] = 1;
             setFavorites(copy);
-            showAlert("Added to favorites");
+            showAlert("נוסף למועדפים");
         }
-        console.log(copy);
     };
 
     return (

@@ -5,6 +5,7 @@ import StartPage from "./pages/Start";
 import { useUserLocation } from "./lib/geolocation";
 import useAttractions from "./hooks/useAttractions";
 import AttractionsPage from "./pages/Attractions";
+import { AlertProvider } from "./lib/alerts";
 
 function App() {
     const { data: userLocation } = useUserLocation();
@@ -16,21 +17,23 @@ function App() {
     const [show, setShow] = useState(false);
 
     return (
-        <div className={styles.App}>
-            <Container fluid className={styles.main}>
-                {!show && (
-                    <StartPage
-                        showAttractions={() => {
-                            setShow(true);
-                            getAttractions();
-                        }}
-                    />
-                )}
-                {show && !!userLocation && (
-                    <AttractionsPage attractions={attractions} />
-                )}
-            </Container>
-        </div>
+        <AlertProvider>
+            <div className={styles.App}>
+                <Container fluid className={styles.main}>
+                    {!show && (
+                        <StartPage
+                            showAttractions={() => {
+                                setShow(true);
+                                getAttractions();
+                            }}
+                        />
+                    )}
+                    {show && !!userLocation && (
+                        <AttractionsPage attractions={attractions} />
+                    )}
+                </Container>
+            </div>
+        </AlertProvider>
     );
 }
 

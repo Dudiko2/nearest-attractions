@@ -1,0 +1,5 @@
+.arrow {
+    height: 0.6rem;
+    width: 0.6rem;
+    fill: var(--active-text);
+}

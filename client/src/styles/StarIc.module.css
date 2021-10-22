@@ -1,0 +1,22 @@
+.star {
+    fill: transparent;
+    transform: scale(0.8);
+    transition: transform 0.2s ease-out;
+    margin: 0.5rem;
+}
+
+.star:active {
+    transform: scale(0.9);
+}
+
+.star:hover {
+    transform: scale(1.1);
+}
+
+.star .stroke {
+    fill: var(--active-text);
+}
+
+.star.active {
+    fill: var(--active-text);
+}

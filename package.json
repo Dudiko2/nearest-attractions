@@ -8,7 +8,9 @@
         "start": "cd server && node build/index.js",
         "dev:server": "cd server && npm run dev",
         "dev:client": "cd client && npm start",
-        "dev": "concurrently \"npm:dev:*\""
+        "dev": "concurrently \"npm:dev:*\"",
+        "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+        "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;"
     },
     "author": "",
     "license": "MIT",

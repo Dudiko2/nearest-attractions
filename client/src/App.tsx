@@ -10,7 +10,11 @@ import { AlertProvider } from "./lib/alerts";
 function App() {
     const { data: userLocation } = useUserLocation();
 
-    const { data: attractions, init: getAttractions } = useAttractions({
+    const {
+        data: attractions,
+        init: getAttractions,
+        loading: loadingAttractions,
+    } = useAttractions({
         latitude: userLocation?.latitude,
         longitude: userLocation?.longitude,
     });
@@ -29,7 +33,10 @@ function App() {
                         />
                     )}
                     {show && !!userLocation && (
-                        <AttractionsPage attractions={attractions} />
+                        <AttractionsPage
+                            loading={loadingAttractions}
+                            attractions={attractions}
+                        />
                     )}
                 </Container>
             </div>

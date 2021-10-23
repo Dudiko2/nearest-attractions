@@ -5,14 +5,19 @@ import styles from "../styles/AttractionsPage.module.css";
 
 interface Props {
     attractions: any[];
+    loading: boolean;
 }
 
-const AttractionsPage: FC<Props> = ({ attractions }) => {
+const AttractionsPage: FC<Props> = ({ attractions, loading }) => {
     return (
         <>
             <Container className={styles.attractionsSection}>
                 <h1>אטרקציות בסביבתך</h1>
-                <Accordion attractions={attractions} />
+                {loading ? (
+                    <p>טוען...</p>
+                ) : (
+                    <Accordion attractions={attractions} />
+                )}
             </Container>
             <Container></Container>
         </>

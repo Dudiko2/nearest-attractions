@@ -1,17 +1,16 @@
 import { FC, useEffect, useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { useAlert } from "../lib/alerts";
-import styles from "../styles/Accordion.module.css";
 import Container from "../wrappers/Container";
 import ArrowIc from "./ArrowIc";
 import StarIc from "./StarIc";
+import { useAlert } from "../lib/alerts";
+import useLocalStorage from "../hooks/useLocalStorage";
+import styles from "../styles/Accordion.module.css";
 
 interface Props {
     attractions: Array<any>;
 }
 
 const Accordion: FC<Props> = ({ attractions }) => {
-    const [attractionTypes, setAttractionTypes] = useState<any[]>([]);
     const [checked, setChecked] = useState("הכל");
     const [favorites, setFavorites] = useLocalStorage<{ [x: string]: any }>(
         "favorites",
@@ -22,16 +21,6 @@ const Accordion: FC<Props> = ({ attractions }) => {
     const isFavorite = (id: string) => {
         return !!favorites[id];
     };
-
-    useEffect(() => {
-        const types = Array.from(
-            new Set(attractions.map((a) => a.attractionType))
-        );
-
-        types.unshift("הכל");
-
-        setAttractionTypes(types);
-    }, [attractions]);
 
     const toggleFavorite = (id: string) => {
         const copy = { ...favorites };
@@ -48,20 +37,11 @@ const Accordion: FC<Props> = ({ attractions }) => {
 
     return (
         <>
-            <Container fluid className={styles.aTypes}>
-                {attractionTypes.map((t) => (
-                    <div key={"type:" + t}>
-                        <input
-                            name="attractionType"
-                            type="radio"
-                            id={t}
-                            checked={checked === t}
-                            onChange={() => setChecked(t)}
-                        />
-                        <label htmlFor={t}>{t}</label>
-                    </div>
-                ))}
-            </Container>
+            <AttractionTypes
+                attractions={attractions}
+                checked={checked}
+                setChecked={setChecked}
+            />
             <ul className={styles.list}>
                 {attractions
                     .filter(
@@ -83,6 +63,47 @@ const Accordion: FC<Props> = ({ attractions }) => {
                     })}
             </ul>
         </>
+    );
+};
+
+interface AttractionTypesProps {
+    attractions: any;
+    checked: string;
+    setChecked: (t: string) => void;
+}
+
+const AttractionTypes: FC<AttractionTypesProps> = ({
+    attractions,
+    checked,
+    setChecked,
+}) => {
+    const [attractionTypes, setAttractionTypes] = useState<string[]>([]);
+
+    useEffect(() => {
+        const types: string[] = Array.from(
+            new Set(attractions.map((a: any) => a.attractionType))
+        );
+
+        types.unshift("הכל");
+
+        setAttractionTypes(types);
+    }, [attractions]);
+
+    return (
+        <Container fluid className={styles.aTypes}>
+            {attractionTypes.map((t) => (
+                <div key={"type:" + t}>
+                    <input
+                        name="attractionType"
+                        type="radio"
+                        id={t}
+                        checked={checked === t}
+                        onChange={() => setChecked(t)}
+                    />
+                    <label htmlFor={t}>{t}</label>
+                </div>
+            ))}
+        </Container>
     );
 };
 
